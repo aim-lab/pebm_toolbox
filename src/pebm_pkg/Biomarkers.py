@@ -6,6 +6,12 @@ from pebm_pkg.Statistics import *
 
 class Biomarkers:
     def __init__(self, signal, fs, fiducials =None):
+        """
+
+        :param signal: the ECG signal as a ndarray.
+        :param fs: the frequency of the signal.
+        :param fiducials:
+        """
         self.signal = signal
         self.fs = fs
         self.fiducials = fiducials
@@ -20,6 +26,28 @@ class Biomarkers:
         self.fiducials = fiducials
 
     def intervals(self):
+        """
+
+        :return:
+        1. dictionary that includes all the row data, for every ‘interval’ biomarker.
+        2. dictionary that includes the mean, median, min, max, iqr and std,
+         for every ‘interval’ biomarker.
+
+        Interval duration and segments:
+        P-waveint:	Time interval between P on and P off.
+        PRint:	Time interval between the P on to the QRS on.
+        PRseg:	Time interval between the P off to the QRS on.
+        PRint2:	Time interval between P peak and R peak as defined by Mao et al.
+        QRSint:	Time interval between the QRS on to the QRS off.
+        QTint:	Time interval between the QRS on to the T off.
+        QTcBint:	Corrected QT interval (QTc) using Bazett’s formula.
+        QTcFriint:	QTc using the Fridericia formula.
+        QTcFraint:	QTc using the Framingham formula.
+        QTcHint:	QTc using the Hodges formula.
+        T-waveint:	Time interval between T on and T off.
+        TPseg:	Time interval between T off and P on.
+        RRint:	Time interval between sequential R peaks.
+        """
         signal = self.signal
         fs = self.fs
         fiducials = self.fiducials
@@ -28,6 +56,20 @@ class Biomarkers:
         return self.intervals_b, self.intervals_statistics
 
     def waves(self):
+        """
+        :return:
+        1. dictionary that includes all the row data, for every ‘wave’ biomarker.
+        2. dictionary that includes the mean, median, min, max, iqr and std, for every ‘wave’ biomarker.
+
+        P-wave:	Amplitude difference between P peak and P off.
+        T-wave:	Amplitude difference between T peak on and T off.
+        R-wave:	R peak amplitude.
+        P-waveArea:	P wave interval area defined as integral from the P on to the P off.
+        T-waveArea:	T wave interval area  defined as integral from the T on to the T off.
+        QRSArea: QRS interval area defined as integral from the QRS on to the QRS off.
+        STseg:	Amplitude difference between QRS off and T on.
+        J-point: Amplitude in 40ms after QRS off as defined by Hollander et al.
+        """
         signal = self.signal
         fs = self.fs
         fiducials = self.fiducials
