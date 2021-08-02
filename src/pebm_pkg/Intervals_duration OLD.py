@@ -18,6 +18,8 @@ def compute_int(freq, features_dict, factor=1000):
     int[(begin_fiducial==-1) | (end_fiducial==-1)] = -1
     return int
 
+
+
 def compute_QTc(QT,RR, factor=1000):
     # Factor uses to convert between units used for morphological
     # calculation (i.e ms) to sec, which needed for QTc calculation
@@ -53,8 +55,7 @@ def extract_intervals_duration(fs, features_dict, factor=1000):
                      QT_int=[features_dict['QRSon'], features_dict['Toff']],
                      Twave_int=[features_dict['Ton'], features_dict['Toff']],
                      TP_seg=[features_dict['Toff'][:-1],features_dict['Pon'][1:]],
-                     RR_int=[features_dict['qrs'][:-1], features_dict['qrs'][1:]],
-                     R_depolarization=[features_dict['QRSon'], features_dict['qrs']])
+                     RR_int=[features_dict['qrs'][:-1], features_dict['qrs'][1:]])
     intervals = {}
     for key in intervals_points:
         intervals[key] = compute_int(fs, intervals_points[key], factor=1000)

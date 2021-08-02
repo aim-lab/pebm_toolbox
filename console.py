@@ -78,8 +78,10 @@ if __name__ == "__main__":
         # Command line arguments: 
         # <exe> <signal path> <fiducials points path> <function name> <args...>
         signal_path = sys.argv[1]
-        signal = read_signal_file(signal_path)
-        
+        # signal = read_signal_file(signal_path)
+        signal = loadmat(signal_path)
+
+        signal = signal['signal'].squeeze()
         fiducial_points_path = sys.argv[2]
         fiducial_points = loadmat(fiducial_points_path)
         
